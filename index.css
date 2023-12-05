@@ -1,0 +1,28 @@
+body{
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    background-color: black;
+}
+
+.scene {
+    width:  500px;
+    height: 500px;
+    background-size: contain;
+    background-image: url("./Prefab/Sprites/Background/background.png");
+}
+
+.player {
+    width: 117px;
+    height: 70px;
+    top: 252px;
+    left: 252px;
+    transition: 0.2s;
+    position: absolute;
+    align-items: center;
+    background-image: url("./Prefab/Sprites/Player/catwalk1.png");
+    background-size: contain;
+}
+
+

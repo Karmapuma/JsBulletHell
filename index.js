@@ -1,40 +1,45 @@
 var tickRate = 20;
+var player = null;
 
 
-function init(){
-    document.getElementById("Player")
+
+function Init(){
+    player = document.getElementById("player");
+    GameLoop();
 }
-
-function GameLoop(){
-function getKey(e){
-    var key_code = e.wich || e.key_code
+function GetKey(e){
+    var key_code = e.wich || e.key_code;
     switch (key_code) {
         case 37:
-            moveLeft();
+            MoveLeft();
         case 38:
-            moveUp();
+            MoveUp();
         case 39:
-            moveRight();
+            MoveRight();
         case 40:
-            moveDown();
+            MoveDown();
     }
+}
+function GameLoop(){
     
+
+
+
+    player.style.top = parseInt(player.style.top - 5 +"px");
+    player.style.position.top = parseInt(player.style.position.top + 5 +"px");
+    //setTimeout(GameLoop, 1000/tickRate);
 }
 
 
-    setTimeout(GameLoop, 1000/tickRate)
+function MoveLeft(){
+    player.style.left = parseInt(player.style.left - 5 + "px");
 }
-
-
-function moveLeft(){
-
+function MoveRight(){
+    player.style.left = parseInt(player.style.left + 5 + "px");
 }
-function moveRight(){
-
+function MoveDown(){
+    player.style.top = parseInt(player.style.top - 5 + "px");
 }
-function moveDown(){
-
-}
-function moveUp(){
-
+function MoveUp(){
+    player.style.top = parseInt(player.style.top + 5 + "px");
 }
