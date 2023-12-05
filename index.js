@@ -1,45 +1,86 @@
 var tickRate = 20;
-var player = null;
+var player = document.getElementById("player");
+var up=false, down =false, left = false, right = false, move = false;
+var debug = 0;
+player.style.left = "250px";
+player.style.top = "250px";
+
 
 
 
 function Init(){
-    player = document.getElementById("player");
     GameLoop();
+    
 }
 function GetKey(e){
-    var key_code = e.wich || e.key_code;
-    switch (key_code) {
-        case 37:
-            MoveLeft();
-        case 38:
-            MoveUp();
-        case 39:
-            MoveRight();
-        case 40:
-            MoveDown();
+    switch (e.key) {
+        case 'ArrowLeft':
+            left = true;
+            break;
+        case 'ArrowUp':
+            up = true;
+            break;
+        case 'ArrowRight':
+            right = true;
+            break;
+        case 'ArrowDown':
+            down = true;
+            break;
     }
 }
+function ReleaseKey(e){
+    switch (e.key) {
+        case 'ArrowLeft':
+            left = false;
+            break;
+        case 'ArrowUp':
+            up = false;
+            break;
+        case 'ArrowRight':
+            right = false;
+            break;
+        case 'ArrowDown':
+            down = false;
+            break;
+    }
+
+}
+
 function GameLoop(){
-    
-
-
-
-    player.style.top = parseInt(player.style.top - 5 +"px");
-    player.style.position.top = parseInt(player.style.position.top + 5 +"px");
-    //setTimeout(GameLoop, 1000/tickRate);
+    console.log("up, down, left, right, move");
+    console.log(up, down, left, right, move);
+    console.log(player.style.left, player.style.top);
+    console.log("left, top");
+    if (up || down || left || right){
+        move = true;
+    }
+    else move = false;
+    if (up){
+        MoveUp();
+    }
+    if (down){
+        MoveDown();
+    }
+    if (left){
+        MoveLeft();
+    }
+    if (right){
+        MoveRight();
+    }
+ 
+    requestAnimationFrame(GameLoop);
 }
 
 
 function MoveLeft(){
-    player.style.left = parseInt(player.style.left - 5 + "px");
+    player.style.left = parseInt(player.style.left) -5;
 }
 function MoveRight(){
-    player.style.left = parseInt(player.style.left + 5 + "px");
+    player.style.left = parseInt(player.style.left)+ 5;
 }
 function MoveDown(){
-    player.style.top = parseInt(player.style.top - 5 + "px");
+    player.style.top = parseInt(player.style.top) + 5;
 }
 function MoveUp(){
-    player.style.top = parseInt(player.style.top + 5 + "px");
+    player.style.top = parseInt(player.style.top) - 5;
 }

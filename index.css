@@ -9,16 +9,19 @@ body{
 .scene {
     width:  500px;
     height: 500px;
+    top: 100px;
+    left: 100px;
     background-size: contain;
+    position: absolute;
     background-image: url("./Prefab/Sprites/Background/background.png");
 }
 
 .player {
     width: 117px;
     height: 70px;
-    top: 252px;
-    left: 252px;
-    transition: 0.2s;
+    top: 250px;
+    left: 250px;
+    transition: 0.01s;
     position: absolute;
     align-items: center;
     background-image: url("./Prefab/Sprites/Player/catwalk1.png");
