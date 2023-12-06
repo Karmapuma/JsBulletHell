@@ -2,14 +2,16 @@
   <link rel="stylesheet" type="text/css" href="index.css">
   <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type" />
   <title>Bullet Hell</title>
-
+  
   
 
   </head>
 <body onload="Init()" onkeydown="GetKey(event)" onkeyup="ReleaseKey(event)">
-    <div id="player" class="player"></div>
-    <div id="Enemy" class="Enemy"></div>
+  <div id="score">Score: 0</div>
+    <div id="player" class="player">
+      <div id="hp" class="hp">HP :</div>
+  </div>
   <script src="index.js" type="text/javascript"></script>
-  <script src="./Rectangle.js" type="text/javascript"></script>
+  
 </body>
 </html>
