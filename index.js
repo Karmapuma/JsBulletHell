@@ -8,8 +8,8 @@ const enemySpeed = 2; // enemy px per refresh
 const spawnRate = 5; // % chance to spawn
 const initMaxEnemies = 5; // max enemies to spawn at start
 const TTL = 70; // time to live
-const playerHP = 50000; //HP at start
-const dropRate = 20; // % chance to drop
+const playerHP = 5; //HP at start
+const dropRate = 100; // % chance to drop
 const invincibilityFrame = 70; // invincibility after hit
 const dashCooldown = 50; // cooldown in refresh
 const dashLenght = 500; // lenght in px
@@ -327,8 +327,6 @@ function Spawn() {
   enemy.className = "enemy";
   let enemyX = 0;
   let enemyY = 0;
-  let enemyWidth = 0;
-  let enemyHeight = 0;
 //Choose side and position to spawn
   let side = Math.trunc(Random(0, 4));
   switch (side) {
@@ -355,8 +353,6 @@ function Spawn() {
 //Put Enemy on the screen
   enemy.style.left = enemyX;
   enemy.style.top = enemyY;
-  enemyWidth = enemyX + enemy.scrollWidth;
-  enemyHeight = enemyY + enemy.scrollHeight;
   enemies.push({ id: enemy.id, x: enemyX, y: enemyY, object: enemy });
   document.body.appendChild(enemy);
 }
@@ -559,7 +555,7 @@ function CheckCollisionDrops(){
           break;
         case "dropShootingRate":
           if (player.shootRate > 10) {
-            player.shootRate -= 1;
+            player.shootRate = player.shootRate * 0.9;
           }
           break;
         case "dropHP":
