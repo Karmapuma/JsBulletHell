@@ -15,7 +15,7 @@ const dashCooldown = 50; // cooldown in refresh
 const dashLenght = 500; // lenght in px
 const playerNumber = 1;
 
-let loop = true;
+let loop = false;
 var highScore = document.getElementById("highScore");
 var width = window.innerWidth; // get window width
 var height = window.innerHeight; // get window height
@@ -100,12 +100,13 @@ function GetKey(e) {
       player.looking = "down";
       player.downMov = true;
       break;
-    case "p":
+    case "Enter":
       if (loop) {
         loop = false;
       } else {
         loop = true;
       }
+      requestAnimationFrame(GameLoop);
       break;
     case " ":
       if (player.dashCounter <= 0) {
@@ -192,7 +193,7 @@ function GameLoop() {
   EnemeyMovement();
   BulletMovement();
   if (loop) {
-    requestAnimationFrame(Init);
+    requestAnimationFrame(GameLoop);
   }
 }
 
@@ -202,6 +203,9 @@ function UpdateCounters() {
   }
   if (refresh > 0) {
     refresh--;
+  }
+  else {
+    RefreshPage()
   }
   if (player.shootTimer > 0) {
     player.shootTimer--;
@@ -220,11 +224,12 @@ function UpdateCounters() {
   }
 
   if (!player.move && player.shootTimer <= 0) {
-    //Shoot if not moving
+//Shoot if not moving
     player.shootTimer = player.shootRate;
     Shoot();
   }
 }
+
 
 function MoveLeft() {
   player.object.style.left = parseInt(player.object.style.left) - player.speed;
@@ -241,6 +246,7 @@ function MoveUp() {
 function RefreshPage() {
   width = window.innerWidth;
   height = window.innerHeight;
+  
 }
 
 
@@ -265,45 +271,50 @@ function Shoot() {
 function Dash() {
 //Give player 30 refresh of invincibility
   player.invincibilityCounter = 30;
+  let segmentation = 100;
 //Dash in player's Facing direction
+//The loop is to segment the dash and collect Drop on the way through
+for (let i = 0; i <segmentation+1; i++) {
   switch (player.looking) {
     case "left":
       if (player.left > player.uDashLenght) {
         player.object.style.left =
-          parseInt(player.object.style.left) - player.uDashLenght;
+          parseInt(player.object.style.left) - player.uDashLenght / segmentation;
       } else {
         player.object.style.left =
-          parseInt(player.object.style.left) - player.left;
+          parseInt(player.object.style.left) - player.left / segmentation;
       }
       break;
     case "right":
       if (player.right + player.uDashLenght < width) {
         player.object.style.left =
-          parseInt(player.object.style.left) + player.uDashLenght;
+          parseInt(player.object.style.left) + player.uDashLenght / segmentation;
       } else {
         player.object.style.left =
-          parseInt(player.object.style.left) + width - player.right;
+          parseInt(player.object.style.left) + width - player.right / segmentation;
       }
       break;
     case "up":
       if (player.top > player.uDashLenght) {
         player.object.style.top =
-          parseInt(player.object.style.top) - player.uDashLenght;
+          parseInt(player.object.style.top) - player.uDashLenght / segmentation;
       } else {
         player.object.style.top =
-          parseInt(player.object.style.top) - player.top;
+          parseInt(player.object.style.top) - player.top / segmentation;
       }
       break;
     case "down":
       if (player.bottom + player.uDashLenght < height) {
         player.object.style.top =
-          parseInt(player.object.style.top) + player.uDashLenght;
+          parseInt(player.object.style.top) + player.uDashLenght / segmentation;
       } else {
         player.object.style.top =
-          parseInt(player.object.style.top) + height - player.bottom;
+          parseInt(player.object.style.top) + height - player.bottom / segmentation;
       }
       break;
   }
+CheckCollisionDrops();
+}
 //Put dash on cooldown
   player.dashCounter = dashCooldown;
 }
@@ -525,6 +536,9 @@ function CheckCollision() {
       }
     }
   }
+  CheckCollisionDrops();
+}
+function CheckCollisionDrops(){
 //Check if player intersects with Drop
   for (var i = 0; i < drops.length; i++) {
     if (Intersect(player, drops[i])) {

@@ -68,3 +68,14 @@ body{
     background-color: rgb(255, 0, 221);
     border-radius: 50%;
 }
+.Help{
+    position: absolute;
+    background-image: url(./Prefab/Sprites/help.png);
+    background-color: rgba(0, 0, 0, 0.633);
+    background-size: cover;
+    height: 150;
+    width: 200;
+    top: 0;
+    right: 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
