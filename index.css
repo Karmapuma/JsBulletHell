@@ -10,10 +10,9 @@ body{
 .player {
     width: 117px;
     height: 70px;
-    transition: 0.01s;
+    transition: 0.05s;
     position: absolute;
     align-items: center;
-    background-image: url("./Prefab/Sprites/Player/catwalk1.png");
     background-size: contain;
 }
 .enemy{

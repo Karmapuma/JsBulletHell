@@ -1,5 +1,5 @@
 class Player {
-    constructor(id, object, HP, HPDiv, score, scoreDiv, speed, top, left, right, bottom, invincibilityCounter, shootSpeed, shootTimer, upMov, downMov, leftMov, rightMov, move, looking) {
+    constructor(id, object, HP, HPDiv, score, scoreDiv, speed, top, left, right, bottom, invincibilityCounter, shootSpeed, shootTimer, upMov, downMov, leftMov, rightMov, move, looking, spriteCounter, sprite, dashCounter, uDashLenght) {
         this.id = id;
         this.object = object;
         this.HP = HP;
@@ -22,4 +22,8 @@ class Player {
         this.rightMov = rightMov;
         this.move = move;
         this.looking = looking;
+        this.spriteCounter = spriteCounter;
+        this.sprite = sprite;
+        this.dashCounter = dashCounter;
+        this.uDashLenght = uDashLenght;
     }}
